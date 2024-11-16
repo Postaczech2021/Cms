@@ -1,16 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import FoodForm, StoreForm
-from .models import Store
+from .models import Store, Food
 from django.db.models import Case, When, Value, IntegerField
 from django.utils import timezone
 
 def dashboard(request):
+    foods = Food.objects.select_related('store').all()
+
     initial_date = request.session.get('date_added', None)
     initial_store = request.session.get('store', None)
     food_form = FoodForm(initial={'date_added': initial_date, 'store': initial_store})
     store_form = StoreForm()
     stores = Store.objects.all()
-    return render(request, 'dashboard.html', {'food_form': food_form, 'store_form': store_form, 'stores': stores})
+    return render(request, 'dashboard.html', {'food_form': food_form, 'store_form': store_form, 'stores': stores,'foods': foods})
 
 def delete_store(request,id):
     store = get_object_or_404(Store, pk=id)

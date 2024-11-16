@@ -15,16 +15,15 @@
       <td>{{ store.name }}</td>
       <td>
         {% if store.name == "Undefined" %}
-          <button class="btn btn-danger" disabled>Odstranit</button>
+         - - -
         {% else %}
-         <form class="mt-4" action="{% url 'delete_store' store.id %}" method="POST">
-          {% csrf_token %}
+          <form class="d-inline" action="{% url 'delete_store' store.id %}" method="POST">
+            {% csrf_token %}
             <button class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
           </form>
-
-         <form class="mt-4" action="{% url 'edit_store' store.id %}" method="POST">
-          {% csrf_token %}
-          <button class="btn btn-info">Edit</button>
+          <form class="d-inline" action="{% url 'edit_store' store.id %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-warning"><i class="bi bi-pencil"></i></button>
           </form>
         {% endif %}
       </td>
@@ -32,5 +31,4 @@
     {% endfor %}
   </tbody>
 </table>
-
 {% endif %}
