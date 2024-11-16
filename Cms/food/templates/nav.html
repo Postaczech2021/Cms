@@ -1,0 +1,24 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="add-food-tab" data-bs-toggle="tab" data-bs-target="#add-food-tab-pane" type="button" role="tab" aria-controls="add-food-tab-pane" aria-selected="true"><i class="bi bi-plus-circle"></i> Přidat</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="food-list-tab" data-bs-toggle="tab" data-bs-target="#food-list-tab-pane" type="button" role="tab" aria-controls="food-list-tab-pane" aria-selected="false">Seznam potravin</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="search-tab" data-bs-toggle="tab" data-bs-target="#search-tab-pane" type="button" role="tab" aria-controls="search-tab-pane" aria-selected="false">Vyhledávání</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics-tab-pane" type="button" role="tab" aria-controls="statistics-tab-pane" aria-selected="false">Statistika</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="stores-tab" data-bs-toggle="tab" data-bs-target="#stores-tab-pane" type="button" role="tab" aria-controls="stores-tab-pane" aria-selected="false">Obchody</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="add-food-tab-pane" role="tabpanel" aria-labelledby="add-food-tab" tabindex="0">{% include 'add_food.html' %}</div>
+  <div class="tab-pane fade" id="food-list-tab-pane" role="tabpanel" aria-labelledby="food-list-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="search-tab-pane" role="tabpanel" aria-labelledby="search-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="statistics-tab-pane" role="tabpanel" aria-labelledby="statistics-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="stores-tab-pane" role="tabpanel" aria-labelledby="stores-tab" tabindex="0">{% include 'stores.html' %}</div>
+</div>

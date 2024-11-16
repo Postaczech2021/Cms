@@ -1,0 +1,28 @@
+{% if stores %}
+{% include 'add_store.html' %}
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Název obchodu</th>
+      <th scope="col">Akce</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for store in stores %}
+    <tr>
+      <th scope="row">{{ store.id }}</th>
+      <td>{{ store.name }}</td>
+      <td>
+        {% if store.name == "Undefined" %}
+          <button class="btn btn-danger" disabled>Odstranit</button>
+        {% else %}
+          <button class="btn btn-danger">Odstranit</button>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
