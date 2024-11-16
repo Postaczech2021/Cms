@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import FoodForm, StoreForm
 from .models import Store
 from django.db.models import Case, When, Value, IntegerField
@@ -11,6 +11,27 @@ def dashboard(request):
     store_form = StoreForm()
     stores = Store.objects.all()
     return render(request, 'dashboard.html', {'food_form': food_form, 'store_form': store_form, 'stores': stores})
+
+def delete_store(request,id):
+    store = get_object_or_404(Store, pk=id)
+    store.delete()
+    return redirect('dashboard')
+
+
+def edit_store(request, id):
+    store = get_object_or_404(Store, id=id)
+    if request.method == 'POST':
+        form = StoreForm(request.POST, instance=store)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+        else:
+            form = StoreForm(instance=store)
+            # If the form is not valid, render the form again with error messages
+            return render(request, 'edit_store.html', {'form': form, 'store': store})
+    else:
+        form = StoreForm(instance=store)
+        return render(request, 'edit_store.html', {'form': form, 'store': store})
 
 def add_food(request):
     if request.method == 'POST':

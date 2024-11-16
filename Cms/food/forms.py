@@ -23,7 +23,7 @@ class FoodForm(forms.ModelForm):
             'unit': forms.Select(attrs={'class': 'form-control'}),
             'store': forms.Select(attrs={'class': 'form-control'}),
             'date_added': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'note': forms.Textarea(attrs={'class': 'form-control'}),
+            'note': forms.Textarea(attrs={'class': 'form-control','rows': 5}),
         }
         labels = {
             'name': "Název položky",
