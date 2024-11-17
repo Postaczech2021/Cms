@@ -6,6 +6,13 @@ class Store(models.Model):
     def __str__(self):
         return self.name
 
+
+class FoodType(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
 class Food(models.Model):
     UNITS = [
         ('pieces', 'ks'),
@@ -15,6 +22,7 @@ class Food(models.Model):
     ]
 
     name = models.CharField(max_length=255)
+    food_type = models.ForeignKey(FoodType, on_delete=models.CASCADE, default=1)
     date_added = models.DateField()
     quantity = models.FloatField()
     unit = models.CharField(max_length=10, choices=UNITS)

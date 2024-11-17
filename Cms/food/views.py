@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import FoodForm, StoreForm
-from .models import Store, Food
+from .models import Store, Food, FoodType
 from django.db.models import Case, When, Value, IntegerField
 from django.utils import timezone
 
 def dashboard(request):
+
     foods = Food.objects.select_related('store').all()
 
     initial_date = request.session.get('date_added', None)
