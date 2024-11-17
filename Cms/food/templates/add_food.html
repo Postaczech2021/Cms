@@ -1,4 +1,4 @@
-<form class="mt-4" action="{% url 'add_food' %}" method="POST">
+<form ction="{% url 'add_food' %}" method="POST">
   {% csrf_token %}
   {{ food_form.as_p }}
  <div class="d-flex justify-content-end"> <button class="btn btn-custom">Přidat</button> </div>

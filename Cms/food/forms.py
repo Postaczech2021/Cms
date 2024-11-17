@@ -19,9 +19,10 @@ class StoreForm(forms.ModelForm):
 class FoodForm(forms.ModelForm):
     class Meta:
         model = Food
-        fields = ['name', 'food_type', 'quantity', 'unit', 'store', 'date_added', 'note']
+        fields = ['name', 'price', 'food_type', 'quantity', 'unit', 'store', 'date_added', 'note']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.TextInput(attrs={'class': 'form-control'}),
             'food_type': forms.Select(attrs={'class': 'form-control'}),
             'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
             'unit': forms.Select(attrs={'class': 'form-control'}),
@@ -31,6 +32,7 @@ class FoodForm(forms.ModelForm):
         }
         labels = {
             'name': "Název",
+            'price':"Cena",
             'food_type':"Typ",
             'quantity': "Množství",
             'unit': "Jednotky",

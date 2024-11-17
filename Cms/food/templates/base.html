@@ -25,12 +25,59 @@
     }
     .btn-custom { color: #aaaaaa;
                   background-color: #1b2029;
-                  border-color: #1b2029;  }
+                  border-color: none;  }
     .btn-custom:hover, .btn-custom:focus {
                 color: #d5d5d5;
                 background-color:  #1b2029;
-                border-color: #0f0f0f;  }
-    .btn-custom:active, .btn-custom.active { background-color: #0c0c0c; /* Tmavší barva pozadí při aktivaci tlačítka */ border-color: #0c0c0c; /* Tmavší barva okraje při aktivaci tlačítka */
+                border-color: none; }
+    .btn-custom:active, .btn-custom.active { background-color: #0c0c0c; /* Tmavší barva pozadí při aktivaci tlačítka */ border-color: #0c0c0c; /* Tmavší barva okraje při aktivaci tlačítka */ }
+    input, select, option, button, h3 {
+    font-weight: bold !important; }
+
+    hr {
+    border: 0;
+    border-top: 4px solid; /* Nastavení horního okraje na 3px */
+    color: #eef0e1; /* Barva čáry (volitelné) */
+
+
+    }
+
+            .nav-tabs {
+            border-bottom: 4px solid #171b23; /* Barva spodní hranice navigace */
+
+        }
+        .nav-tabs .nav-link {
+            border: 0px solid transparent; /* Transparentní okraj */
+            border-top-left-radius: .25rem; /* Zakulacené rohy vlevo nahoře */
+            border-top-right-radius: .25rem; /* Zakulacené rohy vpravo nahoře */
+            padding: .5rem 1rem; /* Vnitřní odsazení */
+            color: #ffffff; /* Barva textu */
+            background-color: #13161b; /* Barva pozadí */
+            margin-right:5px;
+        }
+        .nav-tabs .nav-link:hover {
+            background-color:  #13161b; /* Barva pozadí při najetí myší */
+            color: #d8d3d3; /* Barva textu při najetí myší */
+            border:none;
+        }
+        .nav-tabs .nav-link:focus {
+            outline: none; /* Bez ohraničení při zaměření */
+            background-color: #13161b; /* Barva pozadí při zaměření */
+            color: #ffffff; /* Barva textu při zaměření */
+        }
+        .nav-tabs .nav-link.active {
+            color: #ffffff; /* Barva textu aktivní záložky */
+            background-color: #090a0e;/* Barva pozadí aktivní záložky */
+            border-color:  #252d3b; /* Barvy okraje aktivní záložky */
+
+
+        }
+        .tab-content {
+            border: none; /* Barva okraje obsahu záložek */
+            padding: 1rem; /* Vnitřní odsazení obsahu záložek */
+            background-color: #171b23;/* Barva pozadí obsahu záložek */
+        }
+
 
 </style>
 

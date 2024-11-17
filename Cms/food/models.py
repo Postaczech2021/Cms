@@ -23,6 +23,7 @@ class Food(models.Model):
 
     name = models.CharField(max_length=255)
     food_type = models.ForeignKey(FoodType, on_delete=models.CASCADE, default=1)
+    price = models.FloatField()
     date_added = models.DateField()
     quantity = models.FloatField()
     unit = models.CharField(max_length=10, choices=UNITS)
