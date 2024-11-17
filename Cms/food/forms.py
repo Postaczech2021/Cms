@@ -2,6 +2,9 @@ from django.db.models import Case, When, Value, IntegerField
 from django import forms
 from .models import Food, Store, FoodType
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class StoreForm(forms.ModelForm):
     class Meta:
         model = Store
@@ -23,20 +26,21 @@ class FoodForm(forms.ModelForm):
             'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
             'unit': forms.Select(attrs={'class': 'form-control'}),
             'store': forms.Select(attrs={'class': 'form-control'}),
-            'date_added': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'date_added': DateInput(attrs={'class': 'custom-date-input form-control'}),
             'note': forms.Textarea(attrs={'class': 'form-control','rows': 5}),
         }
         labels = {
-            'name': "Název položky",
-            'food_type':"Typ potraviny",
+            'name': "Název",
+            'food_type':"Typ",
             'quantity': "Množství",
             'unit': "Jednotky",
             'store': "Obchod",
-            'date_added': "Datum přidání",
+            'date_added': "Datum",
             'note': "Poznámka"
         }
 
     def __init__(self, *args, **kwargs):
         super(FoodForm, self).__init__(*args, **kwargs)
+        for field in self.fields: self.fields[field].label_suffix = ''
         self.fields['food_type'].queryset = FoodType.objects.order_by('name')
         self.fields['store'].queryset = Store.objects.exclude(name="Undefined").order_by('name')
