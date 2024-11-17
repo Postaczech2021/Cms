@@ -1,23 +1,28 @@
-<h5>Seznam potravin</h5>
-<hr>
+   <h5>Seznam potravin</h5>
+        <hr>
+        {% if foods %}
+        <table class="table custom-table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Název</th>
+                    <th>Cena</th>
 
-{% if foods %}
+                    <th>Obchod</th>
+                    <th>Datum</th>
 
-<table class="table table-striped mt-4">
-  <thead>
-    <tr>
-      <th scope="col">Název položky</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for food in foods %}
+                <tr>
+                    <td>{{ food.name }}</td>
+                    <td>{{ food.price|floatformat:2 }} Kč</td>
 
-      <th scope="col">Obchod</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for food in foods %}
-    <tr>
-      <td>{{ food.name }}</td>
-      <td>{{ food.store.name }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endif %}
+                    <td>{{ food.store.name }}</td>
+                    <td>{{ food.date_added|date:"d.m.Y" }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}

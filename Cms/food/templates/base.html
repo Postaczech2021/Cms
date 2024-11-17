@@ -78,6 +78,49 @@
             background-color: #171b23;/* Barva pozadí obsahu záložek */
         }
 
+         .custom-table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #ffffff; /* Barva textu */
+            background-color: #13161b; /* Barva pozadí tabulky */
+            border: 1px solid #171b23;
+        }
+        .custom-table th,
+        .custom-table td {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #171b23;
+            font-weight: bold; /* Tučné písmo */
+            background-color: #090a0e; /* Barva pozadí buněk */
+            color: #d8d3d3; /* Barva textu */
+        }
+        .custom-table thead th {
+            vertical-align: bottom;
+            border-bottom: 4px solid #1d242e;
+            background-color: #252d3b; /* Barva pozadí hlavičky */
+        }
+        .custom-table tbody + tbody {
+            border-top: 2px solid #171b23;
+        }
+        .custom-table .table-hover tbody tr:hover {
+            background-color: #13161b; /* Barva pozadí při najetí myší */
+        }
+        .custom-table .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #1b1f27; /* Barva pozadí pro liché řádky */
+        }
+        .custom-table .table-bordered,
+        .custom-table .table-bordered th,
+        .custom-table .table-bordered td {
+            border: 1px solid #171b23;
+        }
+        .custom-table .table-borderless th,
+        .custom-table .table-borderless td,
+        .custom-table .table-borderless thead th,
+        .custom-table .table-borderless tbody + tbody {
+            border: 0;
+        }
+
+
 
 </style>
 
