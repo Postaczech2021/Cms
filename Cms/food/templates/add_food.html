@@ -1,3 +1,6 @@
+<h5>Přidat novou potravinu</h5>
+<hr>
+
 <form ction="{% url 'add_food' %}" method="POST">
   {% csrf_token %}
   {{ food_form.as_p }}

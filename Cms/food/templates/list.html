@@ -1,19 +1,19 @@
-list.html
+<h5>Seznam potravin</h5>
+<hr>
 
 {% if foods %}
 
 <table class="table table-striped mt-4">
   <thead>
     <tr>
-      <th scope="col">ID</th>
       <th scope="col">Název položky</th>
+
       <th scope="col">Obchod</th>
     </tr>
   </thead>
   <tbody>
     {% for food in foods %}
     <tr>
-      <th scope="row">{{ food.id }}</th>
       <td>{{ food.name }}</td>
       <td>{{ food.store.name }}</td>
     </tr>
