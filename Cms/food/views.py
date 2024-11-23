@@ -4,6 +4,17 @@ from .models import Store, Food, FoodType
 from django.db.models import Case, When, Value, IntegerField
 from django.utils import timezone
 
+def search_food(request):
+    query = request.GET.get('q')
+    results = []
+    if query:
+        food_results = Food.objects.filter(name__icontains=query)
+        food_type_results = FoodType.objects.filter(name__icontains=query)
+        food_type_foods = Food.objects.filter(food_type__in=food_type_results)
+        results = food_results | food_type_foods
+    return render(request, 'food_search.html', {'results': results})
+
+
 
 def food_list(request):
     foods = Food.objects.all().select_related('food_type', 'store')

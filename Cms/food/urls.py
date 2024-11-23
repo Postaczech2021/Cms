@@ -11,4 +11,5 @@ urlpatterns = [
     path('edit/store/<int:id>',views.edit_store, name='edit_store'),
     path('delete/store/<int:id>',views.delete_store, name='delete_store'),
     path('filter/category/<int:category_id>', filter_by_category, name='filter_by_category'),
+    path('search', views.search_food, name='search_food'),
 ]
