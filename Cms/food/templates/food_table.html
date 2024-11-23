@@ -17,9 +17,9 @@
             {% for food in foods %}
             <tr>
                 <td>{{ food.name }}</td>
-                <td>{% if food.food_type.name != "Undefined" %}<a href="{% url 'filter_by_category' food.food_type.id  %}">
-                {{ food.food_type.name }}
-      </a>{% endif %}</td>
+                <td>{% if food.food_type.name != "Undefined" %}<a href="{% url 'filter_by_category' food.food_type.id  %}">{{ food.food_type.name }}</a>
+                    {% endif %}
+                </td>
                 <td>
                     <form action="{% url 'edit_food' food.id %}" method="post">
                         {% csrf_token %}
