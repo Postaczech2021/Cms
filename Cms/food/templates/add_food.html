@@ -1,8 +1,20 @@
-<h5>Přidat novou potravinu</h5>
-<hr>
-
-<form ction="{% url 'add_food' %}" method="POST">
-  {% csrf_token %}
-  {{ food_form.as_p }}
- <div class="d-flex justify-content-end"> <button class="btn btn-custom">Přidat</button> </div>
-</form>
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+{{ block.super }}
+<div class="container-fluid full-height d-flex flex-column">
+    <div class="row flex-grow-1">
+        <div class="col-12 full-height">
+            <h5 class="mt-3">Přidat potravinu</h5>
+            <hr>
+            <form action="{% url 'add_food' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -4,6 +4,11 @@ from .models import Store, Food, FoodType
 from django.db.models import Case, When, Value, IntegerField
 from django.utils import timezone
 
+
+def food_list(request):
+    foods = Food.objects.all().select_related('food_type', 'store')
+    return render(request, 'food_list.html', {'foods': foods})
+
 def dashboard(request):
 
     foods = Food.objects.select_related('store').all()
@@ -41,15 +46,22 @@ def add_food(request):
         form = FoodForm(request.POST)
         if form.is_valid():
             food = form.save(commit=False)
-            food.save()
-            # Uložení dat do session
-            request.session['date_added'] = str(food.date_added)
-            request.session['store'] = food.store.id
-            return redirect('dashboard')
+            print(f"Form data: {form.cleaned_data}")  # Ladící výpis
+            try:
+                food.save()
+                print(f"Food saved: {food}")  # Ladící výpis
+                # Uložení dat do session
+                request.session['date_added'] = str(food.date_added)
+                request.session['store'] = food.store.id  # Uložení ID obchodu
+                return redirect('dashboard')
+            except Exception as e:
+                print(f"Error saving food: {e}")  # Ladící výpis
+        else:
+            print(f"Form errors: {form.errors}")  # Ladící výpis
     else:
         # Načtení dat ze session
-        initial_date = request.session.get('date_added', None)
-        initial_store = request.session.get('store', None)
+        initial_date = request.session.get('date_added')
+        initial_store = request.session.get('store')
         form = FoodForm(initial={'date_added': initial_date, 'store': initial_store})
     return render(request, 'add_food.html', {'form': form})
 
@@ -63,3 +75,6 @@ def add_store(request):
     else:
         form = StoreForm
     return render(request, 'add_food.html', {'form': form})
+
+def edit_food(request,id):
+    return render(request,'dashboard.html')
