@@ -20,7 +20,7 @@
                 <td>{% if food.food_type.name != "Undefined" %}<a href="{% url 'filter_by_category' food.food_type.id  %}">{{ food.food_type.name }}</a>
                     {% endif %}
                 </td>
-                <td>
+                <td>sss
                     <form action="{% url 'edit_food' food.id %}" method="post">
                         {% csrf_token %}
                         <button class="btn btn-primary"> <i class="bi bi-pen-fill"></i>  </button>
