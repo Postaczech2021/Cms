@@ -3,12 +3,12 @@
         <thead>
             <tr>
                 <th scope="col">Název</th>
-                <th scope="col">Typ</th>
+                <th scope="col">Kategorie</th>
                 <th scope="col">Akce</th>
                 <th scope="col">Cena</th>
                 <th scope="col">Datum</th>
                 <th scope="col">Množství</th>
-                <th scope="col">Jednotka</th>
+
                 <th scope="col">Obchod</th>
                 <th scope="col">Poznámka</th>
             </tr>
@@ -17,9 +17,10 @@
             {% for food in foods %}
             <tr>
                 <td>{{ food.name }}</td>
-                <td>{% if food.food_type.name != "Undefined" %}<a href="{% url 'filter_by_category' food.food_type.id  %}">{{ food.food_type.name }}</a>
+                <td>{% if food.food_type.name != "------------" %}<a href="{% url 'filter_by_category' food.food_type.id  %}">{{ food.food_type.name }}</a></td>
+                 {% else %}
+                    Nepřiřazeno
                     {% endif %}
-                </td>
                 <td>
                     <form action="{% url 'edit_food' food.id %}" method="post">
                         {% csrf_token %}
@@ -27,9 +28,14 @@
                     </form>
                 </td>
                 <td>{{ food.price|floatformat:2 }} Kč</td>
-                <td>{{ food.date_added }}</td>
-                <td>{{ food.quantity }}</td>
-                <td>{{ food.unit }}</td>
+                <td>{{ food.date_added|date:"d.m.Y" }}</td>
+                <td>{{ food.quantity|floatformat:0 }}
+                    {% if food.unit == "grams" %} g
+                    {% elif food.unit == "mililiters" %} ml
+                    {% elif food.unit == "liters" %} l
+                    {% elif food.unit == "pieces" %} ks
+                    {% else %} {{ food.unit }}</td>
+                    {% endif %}
                 <td>{{ food.store.name }}</td>
                 <td>{{ food.note }}</td>
             </tr>

@@ -33,7 +33,7 @@ class FoodForm(forms.ModelForm):
         labels = {
             'name': "Název",
             'price':"Cena",
-            'food_type':"Typ",
+            'food_type':"Kategorie",
             'quantity': "Množství",
             'unit': "Jednotky",
             'store': "Obchod",

@@ -1,5 +1,10 @@
 <ul class="mt-4 nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
+       <a class="nav-link" id="settings-tab" href="{% url 'dashboard'  %}" role="tab" aria-controls="settings-tab-pane" aria-selected="false">   <i class="bi bi-x-diamond-fill"></i> </a>
+             </li>
+
+
+    <li class="nav-item" role="presentation">
         <a class="nav-link active" id="food-list-tab" href="{% url 'food_list' %}" role="tab" aria-controls="food-tab-pane" aria-selected="true">  <i class="bi bi-list"></i> </a>
     </li>
     <li class="nav-item" role="presentation">
@@ -20,8 +25,5 @@
        <a class="nav-link" id="settings-tab" href="" role="tab" aria-controls="settings-tab-pane" aria-selected="false"><i class="bi bi-wrench"></i></a>
        
    </li>
-<li class="nav-item" role="presentation">
-       <a class="nav-link" id="settings-tab" href="{% url 'dashboard'  %}" role="tab" aria-controls="settings-tab-pane" aria-selected="false">   <i class="bi bi-x-diamond-fill"></i> </a>
-             </li>
 
 </ul>
