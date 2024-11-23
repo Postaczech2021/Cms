@@ -1,26 +1,27 @@
-<ul class="nav nav-tabs" id="myTab" role="tablist">
+<ul class="mt-4 nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="food-list-tab" data-bs-toggle="tab" data-bs-target="#food-list-tab-pane" type="button" role="tab" aria-controls="food-list-tab-pane" aria-selected="false"><i class="bi bi-list"></i></button>
-  </li>
+        <a class="nav-link active" id="food-list-tab" href="{% url 'food_list' %}" role="tab" aria-controls="food-tab-pane" aria-selected="true">  <i class="bi bi-list"></i> </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="add-food-tab" href="{% url 'add_food' %}" role="tab" aria-controls="add-food-tab-pane" aria-selected="false"> <i class="bi bi-bag-plus"></i>  </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="search-tab" href="" role="tab" aria-controls="search-tab-pane" aria-selected="false"> <i class="bi bi-search"></i></a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="statistics-tab" href="" role="tab" aria-controls="statistics-tab-pane" aria-selected="false"> <i class="bi bi-graph-up"></i>  </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="stores-tab" href="" role="tab" aria-controls="stores-tab-pane" aria-selected="false"> <i class="bi bi-shop-window"></i>  </a>
+        
+    </li>
 
-  <li class="nav-item" role="presentation">
-    <button class="nav-link " id="add-food-tab" data-bs-toggle="tab" data-bs-target="#add-food-tab-pane" type="button" role="tab" aria-controls="add-food-tab-pane" aria-selected="true"><i class="bi bi-plus-circle"></i></button>
-  </li>
+<li class="nav-item" role="presentation">
+       <a class="nav-link" id="settings-tab" href="" role="tab" aria-controls="settings-tab-pane" aria-selected="false"><i class="bi bi-wrench"></i></a>
+       
+   </li>
+<li class="nav-item" role="presentation">
+       <a class="nav-link" id="settings-tab" href="{% url 'dashboard'  %}" role="tab" aria-controls="settings-tab-pane" aria-selected="false">   <i class="bi bi-x-diamond-fill"></i> </a>
+             </li>
 
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="search-tab" data-bs-toggle="tab" data-bs-target="#search-tab-pane" type="button" role="tab" aria-controls="search-tab-pane" aria-selected="false"><i class="bi bi-search"></i></button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics-tab-pane" type="button" role="tab" aria-controls="statistics-tab-pane" aria-selected="false"><i class="bi bi-graph-up"></i></button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="stores-tab" data-bs-toggle="tab" data-bs-target="#stores-tab-pane" type="button" role="tab" aria-controls="stores-tab-pane" aria-selected="false"><i class="bi bi-shop"></i></button>
-  </li>
 </ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade" id="add-food-tab-pane" role="tabpanel" aria-labelledby="add-food-tab" tabindex="0">{% include 'add_food.html' %}</div>
-  <div class="tab-pane fade show active" id="food-list-tab-pane" role="tabpanel" aria-labelledby="food-list-tab" tabindex="0">{% include 'list.html' %}</div>
-  <div class="tab-pane fade" id="search-tab-pane" role="tabpanel" aria-labelledby="search-tab" tabindex="0">...</div>
-  <div class="tab-pane fade" id="statistics-tab-pane" role="tabpanel" aria-labelledby="statistics-tab" tabindex="0">...</div>
-  <div class="tab-pane fade" id="stores-tab-pane" role="tabpanel" aria-labelledby="stores-tab" tabindex="0">{% include 'stores.html' %}</div>
-</div>
