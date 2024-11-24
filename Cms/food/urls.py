@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .food_filters import filter_by_category
+from .food_filters import *
 
 urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
@@ -11,5 +11,6 @@ urlpatterns = [
     path('edit/store/<int:id>',views.edit_store, name='edit_store'),
     path('delete/store/<int:id>',views.delete_store, name='delete_store'),
     path('filter/category/<int:category_id>', filter_by_category, name='filter_by_category'),
+    path('filter/store/<int:store_id>',filter_by_store,name='filter_by_store'),
     path('search', views.search_food, name='search_food'),
 ]

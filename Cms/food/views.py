@@ -87,5 +87,13 @@ def add_store(request):
         form = StoreForm
     return render(request, 'add_food.html', {'form': form})
 
-def edit_food(request,id):
-    return render(request,'dashboard.html')
+def edit_food(request, id):
+    food = get_object_or_404(Food, pk=id)
+    if request.method == 'POST':
+        form = FoodForm(request.POST, instance=food)
+        if form.is_valid():
+            form.save()
+            return redirect('food_list')  # nebo název tvé URL, která zobrazuje seznam jídel
+    else:
+        form = FoodForm(instance=food)
+    return render(request, 'edit_food.html', {'form': form, 'food': food})

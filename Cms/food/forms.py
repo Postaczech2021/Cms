@@ -43,6 +43,9 @@ class FoodForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(FoodForm, self).__init__(*args, **kwargs)
-        for field in self.fields: self.fields[field].label_suffix = ''
-        self.fields['food_type'].queryset = FoodType.objects.order_by('name')
-        self.fields['store'].queryset = Store.objects.exclude(name="Undefined").order_by('name')
+        for field in self.fields:
+            self.fields[field].required = False
+            self.fields[field].label_suffix = ''
+            self.fields['date_added'].initial = kwargs['instance'].date_added if 'instance' in kwargs else None
+            self.fields['food_type'].queryset = FoodType.objects.order_by('name')
+            self.fields['store'].queryset = Store.objects.exclude(name="Undefined").order_by('name')

@@ -21,12 +21,19 @@
                  {% else %}
                     Nepřiřazeno
                     {% endif %}
-                <td>
-                    <form action="{% url 'edit_food' food.id %}" method="post">
-                        {% csrf_token %}
-                        <button class="btn btn-primary"> <i class="bi bi-pen-fill"></i>  </button>
-                    </form>
-                </td>
+              <td>
+    <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
+        <a style="width: 40px; margin: 0;" href="{% url 'edit_food' food.id %}" class="btn btn-custom">
+            <i class="bi bi-pen-fill"></i>
+        </a>
+        <a style="width: 40px; margin: 0;" href="{% url 'edit_food' food.id %}" class="btn btn-custom">
+            <i class="bi bi-trash3-fill"></i>
+        </a>
+    </div>
+</td>
+
+
+
                 <td>{{ food.price|floatformat:2 }} Kč</td>
                 <td>{{ food.date_added|date:"d.m.Y" }}</td>
                 <td>{{ food.quantity|floatformat:0 }}
@@ -36,7 +43,7 @@
                     {% elif food.unit == "pieces" %} ks
                     {% else %} {{ food.unit }}</td>
                     {% endif %}
-                <td>{{ food.store.name }}</td>
+                <td><a href="{% url 'filter_by_store' food.store.id  %}">{{ food.store.name }}</a></td>
                 <td>{{ food.note }}</td>
             </tr>
             {% endfor %}
