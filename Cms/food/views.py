@@ -97,3 +97,8 @@ def edit_food(request, id):
     else:
         form = FoodForm(instance=food)
     return render(request, 'edit_food.html', {'form': form, 'food': food})
+
+def delete_food(request,id):
+    food = get_object_or_404(Food, pk=id)
+    food.delete()
+    return redirect('food_list')
