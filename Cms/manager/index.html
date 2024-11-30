@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .content-editable {
+            width: 100%;
+            min-height: 80vh;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+            font-family: monospace;
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>Content of Food Files</h1>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            {% for filename in files_content.keys() %}
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if loop.first %}active{% endif %}" id="{{ filename }}-tab" data-bs-toggle="tab" data-bs-target="#{{ filename }}" type="button" role="tab" aria-controls="{{ filename }}" aria-selected="true">{{ filename }}</button>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            {% for filename, content in files_content.items() %}
+            <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="{{ filename }}" role="tabpanel" aria-labelledby="{{ filename }}-tab">
+                <form method="post" action="/save" id="form-{{ filename }}">
+                    <div class="content-editable" contenteditable="true" name="content">{{ content }}</div>
+                    <input type="hidden" name="filename" value="{{ filename }}">
+                    <button type="submit" class="btn btn-primary mt-2">Save</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/style.js"></script>
+    <script>
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                const contentDiv = this.querySelector('.content-editable');
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'content';
+                hiddenInput.value = contentDiv.innerText;
+                this.appendChild(hiddenInput);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -7,7 +7,13 @@
         <div class="col-12 full-height">
             <h5 class="mt-3">Seznam potravin</h5>
             <hr>
+            {% if foods %}
             {% include 'food_table.html' %}
+            {% else  %}
+            <h4>Žádná potravina nebyla nalezena</h4>
+<a class="mt-2 btn btn-custom" href="{% url 'add_food' %}">Přidat potravinu</a>
+            {% endif  %}
+
         </div>
     </div>
 </div>

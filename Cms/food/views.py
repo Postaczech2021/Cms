@@ -1,8 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import FoodForm, StoreForm
-from .models import Store, Food, FoodType
+from .forms import FoodForm,StoreForm
+from .models import Store, Food, FoodType, Outcome
 from django.db.models import Case, When, Value, IntegerField
 from django.utils import timezone
+from django.contrib.contenttypes.models import ContentType
+
+def statistics(request):
+    # Získání ContentType pro model Food
+    food_content_type = ContentType.objects.get_for_model(Food)
+    # Spočítání všech záznamů v tabulce Outcome, které odpovídají modelu Food
+    food_count = Outcome.objects.filter(content_type=food_content_type).count()
+    return render(request, 'statistics.html', {'food_count': food_count})
+
 
 def search_food(request):
     query = request.GET.get('q')
@@ -14,10 +23,8 @@ def search_food(request):
         results = food_results | food_type_foods
     return render(request, 'food_search.html', {'results': results})
 
-
-
 def food_list(request):
-    foods = Food.objects.all().select_related('food_type', 'store')
+    foods = Food.objects.all().select_related('food_type', 'store', 'payment_method').order_by('name')
     return render(request, 'food_list.html', {'foods': foods})
 
 def dashboard(request):
@@ -52,29 +59,46 @@ def edit_store(request, id):
         form = StoreForm(instance=store)
         return render(request, 'edit_store.html', {'form': form, 'store': store})
 
+
 def add_food(request):
     if request.method == 'POST':
         form = FoodForm(request.POST)
         if form.is_valid():
             food = form.save(commit=False)
-            print(f"Form data: {form.cleaned_data}")  # Ladící výpis
             try:
                 food.save()
-                print(f"Food saved: {food}")  # Ladící výpis
+                print(f"Food saved: {food}")  # Logování pro kontrolu
+                outcome = add_outcome(food.id, Food)  # Volání funkce add_outcome
+                print(f"Outcome created: {outcome}")  # Logování pro kontrolu
                 # Uložení dat do session
                 request.session['date_added'] = str(food.date_added)
-                request.session['store'] = food.store.id  # Uložení ID obchodu
+                request.session['store'] = food.store.id
                 return redirect('dashboard')
             except Exception as e:
-                print(f"Error saving food: {e}")  # Ladící výpis
+                print(f"Error saving food: {e}")
         else:
-            print(f"Form errors: {form.errors}")  # Ladící výpis
+            print(f"Form errors: {form.errors}")
     else:
         # Načtení dat ze session
         initial_date = request.session.get('date_added')
         initial_store = request.session.get('store')
         form = FoodForm(initial={'date_added': initial_date, 'store': initial_store})
     return render(request, 'add_food.html', {'form': form})
+
+def add_outcome(item_id, model):
+    """
+    Univerzální funkce pro přidání záznamu do Outcome.
+    :param item_id: ID instance modelu, pro kterou chcete přidat záznam.
+    :param model: Model instance, pro kterou chcete přidat záznam.
+    """
+    if item_id is not None:
+        content_type = ContentType.objects.get_for_model(model)
+        Outcome.objects.create(
+            content_type=content_type,
+            object_id=item_id,
+            name='Default Name',  # Zde můžete nastavit výchozí hodnotu nebo ji předat jako parametr
+            description='Default Description'  # Zde můžete nastavit výchozí hodnotu nebo ji předat jako parametr
+        )
 
 def add_store(request):
     if request.method == 'POST':

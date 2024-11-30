@@ -16,6 +16,6 @@ urlpatterns = [
 
     path('filter/category/<int:category_id>', filter_by_category, name='filter_by_category'),
     path('filter/store/<int:store_id>',filter_by_store,name='filter_by_store'),
-
+    path('statistics', views.statistics, name='statistics'),
     path('search', views.search_food, name='search_food'),
 ]
